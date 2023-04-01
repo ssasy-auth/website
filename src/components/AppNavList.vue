@@ -1,0 +1,32 @@
+<script setup lang="ts">
+import { useNavRoutes } from '@/composables';
+
+const { getAppOptions } = useNavRoutes();
+
+</script>
+
+<template>
+  <v-list color="primary">
+    <v-list-item
+      v-for="option in getAppOptions"
+      :key="option.label"
+      :to="option.to"
+      class="nav-label"
+      @click="option.action">
+      <template
+        v-if="option.icon"
+        v-slot:prepend>
+        <v-icon :icon="option.icon"></v-icon>
+      </template>
+
+      {{ option.label }}
+    </v-list-item>
+  </v-list>
+</template>
+
+<style scoped>
+.nav-label {
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+</style>
