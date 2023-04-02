@@ -3,16 +3,12 @@ import { useDisplay } from 'vuetify';
 import { useSidebarStore } from '@/stores';
 import AppLogo from './AppLogo.vue';
 
-const sidebarStore = useSidebarStore();
-
 const { smAndDown } = useDisplay();
 
 </script>
 
 <template>
   <v-app-bar app flat color="transparent" class="bar-container">
-    <v-app-bar-nav-icon v-if="smAndDown" icon="mdi-account-circle" @click="sidebarStore.toggle" />
-
     <router-link class="bar-logo hide-link mt-2 pa-1" to="/">
       <app-logo />
     </router-link>
