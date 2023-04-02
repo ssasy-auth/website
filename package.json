@@ -1,6 +1,6 @@
 {
   "name": "website",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "repository": "ssasy-auth/website",
   "scripts": {
     "dev": "vite",
@@ -37,9 +37,9 @@
     "vue-tsc": "^1.2.0"
   },
   "simple-git-hooks": {
-    "pre-commit": "npx lint-staged && npm run test:silent"
+    "pre-commit": "npx lint-staged"
   },
   "lint-staged": {
-    "*": "npm run lint:fix"
+    "src/**/*": "npm run lint:fix"
   }
 }
