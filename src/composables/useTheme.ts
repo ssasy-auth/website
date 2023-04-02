@@ -17,6 +17,6 @@ export function useTheme() {
 
   return {
     darkMode,
-    setDarkMode,
+    setDarkMode
   };
 }

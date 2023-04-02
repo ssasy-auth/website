@@ -16,8 +16,14 @@ onMounted(async () => {
 </script>
 
 <template>
-  <v-app-bar app flat color="transparent" class="bar-container">
-    <router-link class="bar-logo hide-link mt-2 pa-1" to="/">
+  <v-app-bar
+    app
+    flat
+    color="transparent"
+    class="bar-container">
+    <router-link
+      class="bar-logo hide-link mt-2 pa-1"
+      to="/">
       <app-logo />
     </router-link>
 

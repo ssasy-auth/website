@@ -13,7 +13,7 @@ const props = defineProps({
   },
   block: {
     type: Boolean,
-    default: false,
+    default: false
   }
 })
 
@@ -22,8 +22,16 @@ const { sendTo } = useExtenralWebsite();
 </script>
 
 <template>
-  <base-btn large :color="props.color" :block="props.block" @click="sendTo(DEMO_URL)">
+  <base-btn
+    large
+    :color="props.color"
+    :block="props.block"
+    @click="sendTo(DEMO_URL)">
     Try demo
-    <BaseImage :src="LogoImage" alt="app logo" height="20px" class="mx-1" />
+    <base-image
+      :src="LogoImage"
+      alt="app logo"
+      height="20px"
+      class="mx-1" />
   </base-btn>
 </template>

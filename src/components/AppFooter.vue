@@ -20,19 +20,40 @@ const { smAndDown } = useDisplay();
 </script>
 
 <template>
-  <v-footer id="foot" app absolute>
+  <v-footer
+    id="foot"
+    app
+    absolute>
     <v-row :class="`pa-1 ${smAndDown ? 'text-center' : '' }`">
       <!-- ssasy -->
-      <v-col cols="11" md="3" order="2" order-md="1">
-        <base-image :src="LogoImage" alt="ssasy logo" height="20px" class="mx-1" />
+      <v-col
+        cols="11"
+        md="3"
+        order="2"
+        order-md="1">
+        <base-image
+          :src="LogoImage"
+          alt="ssasy logo"
+          height="20px"
+          class="mx-1" />
         <span class="mx-1">&copy; 2023 <code>ssasy</code></span>
       </v-col>
 
       <!-- links -->
-      <v-col cols="11" md="auto" order="1" order-md="2">
+      <v-col
+        cols="11"
+        md="auto"
+        order="1"
+        order-md="2">
         <ul>
-          <li v-for="link in links" :key="link.name">
-            <a :href="link.url" target="_blank" rel="noopener noreferrer" class="mx-1">
+          <li
+            v-for="link in links"
+            :key="link.name">
+            <a
+              :href="link.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mx-1">
               {{ link.name }}
             </a>
           </li>

@@ -26,43 +26,76 @@ onMounted(async () => {
 
 <template>
   <base-page>
-    <v-row id="billboard" :justify="mdAndUp ? 'space-between' : 'center'" :align="mdAndUp ? 'center' : 'start'">
-      <v-col cols="11" md="6" order="2" order-md="1" :class="mdAndUp ? '' : 'text-center'">
+    <v-row
+      id="billboard"
+      :justify="mdAndUp ? 'space-between' : 'center'"
+      :align="mdAndUp ? 'center' : 'start'">
+      <v-col
+        cols="11"
+        md="6"
+        order="2"
+        order-md="1"
+        :class="mdAndUp ? '' : 'text-center'">
         <div id="title">
           Supercharge your website's user authentication
         </div>
-        <div id="subtitle" class="text-grey-darken-3 mt-1">
+        <div
+          id="subtitle"
+          class="text-grey-darken-3 mt-1">
           A secure, usable and scalable alternative to existing password
           and federation-based user authentication schemes that leverages
           public key cryptography to enable a seamless developer and
           user experience.
         </div>
         
-        <div id="call-to-action" class="mt-2 mx-auto">
+        <div
+          id="call-to-action"
+          class="mt-2 mx-auto">
 
-          <demo-btn v-if="extensionInstalled" block />
-          <download-btn v-else block />
+          <demo-btn
+            v-if="extensionInstalled"
+            block />
+          <download-btn
+            v-else
+            block />
         </div>
       </v-col>
 
-      <v-col md="auto" order="1" order-md="2" class="text-center">
-        <base-image :src="ScreenshotImage" :alt="'Screenshot of SSASy'" :height="mdAndUp ? '500px' : '350px'" />
+      <v-col
+        md="auto"
+        order="1"
+        order-md="2"
+        class="text-center">
+        <base-image
+          :src="ScreenshotImage"
+          :alt="'Screenshot of SSASy'"
+          :height="mdAndUp ? '500px' : '350px'" />
       </v-col>
     </v-row>
 
-    <v-row id="pitch" justify="center">
-      <v-col cols="auto" class="text-center">
+    <v-row
+      id="pitch"
+      justify="center">
+      <v-col
+        cols="auto"
+        class="text-center">
         <div id="title">{{ isDeveloper ? 'Developer' : 'User' }} Benefits</div>
       </v-col>
 
       <v-divider class="border-opacity-0" />
       <v-col cols="auto">
-        <v-switch v-model="isDeveloper" inset color="primary" />
+        <v-switch
+          v-model="isDeveloper"
+          inset
+          color="primary" />
       </v-col>
 
       <v-divider class="border-opacity-0 mt-2" />
 
-      <v-col v-for="pitch in pitches" :key="pitch.problem" cols="11">
+      <v-col
+        v-for="pitch in pitches"
+        :key="pitch.problem"
+        cols="11">
         <base-card :outlined="false">
           <h3>{{ pitch.problem }}</h3>
           <p v-html="pitch.solution"></p>

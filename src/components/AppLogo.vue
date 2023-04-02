@@ -9,10 +9,15 @@ const { mdAndUp } = useDisplay();
 <template>
   <v-row align='center'>
     <v-col id="logo-image">
-      <BaseImage :src="AppLogo" alt="ssasy logo" height="50px" />
+      <base-image
+        :src="AppLogo"
+        alt="ssasy logo"
+        height="50px" />
     </v-col>
 
-    <v-col v-if="mdAndUp" id="logo-name">
+    <v-col
+      v-if="mdAndUp"
+      id="logo-name">
       <code>ssasy</code>
     </v-col>
   </v-row>

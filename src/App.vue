@@ -10,7 +10,9 @@ import AppFooter from './components/AppFooter.vue';
     
     <v-main>
       <v-row justify="center">
-        <v-col cols="11" md="9">
+        <v-col
+          cols="11"
+          md="9">
           <router-view />
         </v-col>
       </v-row>
