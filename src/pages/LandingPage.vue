@@ -1,17 +1,26 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useDisplay } from 'vuetify/lib/framework.mjs';
 import { useMarketingPitch } from '@/composables';
+import { Bridge } from '@ssasy-auth/extension';
 import BasePage from '@/components/base/BasePage.vue';
 import BaseCard from '@/components/base/BaseCard.vue';
 import BaseImage from '@/components/base/BaseImage.vue';
+import DemoBtn from '@/components/buttons/DemoBtn.vue';
+import DownloadBtn from '@/components/buttons/DownloadBtn.vue';
 import ScreenshotImage from '@/assets/images/screenshots/light-confirm.png';
 
 const { mdAndUp } = useDisplay();
 const { userPitches, developerPitches } = useMarketingPitch();
 
+const extensionInstalled = ref<boolean>(false);
 const isDeveloper = ref<boolean>(true);
+
 const pitches = computed(() => (isDeveloper.value ? developerPitches.value : userPitches.value));
+
+onMounted(async () => {
+  extensionInstalled.value = await Bridge.isExtensionInstalled();
+});
 
 </script>
 
@@ -28,16 +37,17 @@ const pitches = computed(() => (isDeveloper.value ? developerPitches.value : use
           public key cryptography to enable a seamless developer and
           user experience.
         </div>
+        
+        <div id="call-to-action" class="mt-2 mx-auto">
+
+          <demo-btn v-if="extensionInstalled" block />
+          <download-btn v-else block />
+        </div>
       </v-col>
 
       <v-col md="auto" order="1" order-md="2" class="text-center">
         <base-image :src="ScreenshotImage" :alt="'Screenshot of SSASy'" :height="mdAndUp ? '500px' : '350px'" />
       </v-col>
-    </v-row>
-
-    <v-row id="cta" justify="center">
-      <!-- download -->
-      <!-- demo -->
     </v-row>
 
     <v-row id="pitch" justify="center">

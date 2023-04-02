@@ -1,10 +1,18 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue';
 import { useDisplay } from 'vuetify';
-import { useSidebarStore } from '@/stores';
-import AppLogo from './AppLogo.vue';
+import { Bridge } from '@ssasy-auth/extension';
+import AppLogo from '@/components/AppLogo.vue';
+import DemoBtn from '@/components/buttons/DemoBtn.vue';
+import DownloadBtn from '@/components/buttons/DownloadBtn.vue';
 
 const { smAndDown } = useDisplay();
 
+const extensionInstalled = ref<boolean>(false);
+
+onMounted(async () => {
+  extensionInstalled.value = await Bridge.isExtensionInstalled();
+});
 </script>
 
 <template>
@@ -14,25 +22,35 @@ const { smAndDown } = useDisplay();
     </router-link>
 
     <v-spacer />
+
+    <div v-if="!smAndDown">
+      <demo-btn v-if="extensionInstalled"/>
+      <download-btn v-else />
+    </div>
   </v-app-bar>
 </template>
 
 <style scoped>
-@media (max-width: 600px) {
-  .bar-container {
-    position: relative;
-  }
+.bar-container {
+  position: relative;
+}
 
-  .bar-logo {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+.bar-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 @media (min-width: 601px) {
   .bar-container {
+    position: inherit;
     padding-left: 50px;
+    padding-right: 50px;
   }
-}
-</style>
+
+  .bar-logo {
+    position: inherit;
+    left: inherit;
+    transform: none;
+  }
+}</style>
