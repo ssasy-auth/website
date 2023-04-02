@@ -10,6 +10,10 @@ interface Links {
 
 const links: Links[] = [
   {
+    name: 'Demo',
+    url: 'https://demo.ssasy.net'
+  },
+  {
     name: 'Github',
     url: 'https://github.com/ssasy-auth'
   }
@@ -45,10 +49,12 @@ const { smAndDown } = useDisplay();
         md="auto"
         order="1"
         order-md="2">
-        <ul>
-          <li
+        <v-row>
+          <v-col
             v-for="link in links"
-            :key="link.name">
+            :key="link.name"
+            cols="12"
+            md="auto">
             <a
               :href="link.url"
               target="_blank"
@@ -56,8 +62,8 @@ const { smAndDown } = useDisplay();
               class="mx-1">
               {{ link.name }}
             </a>
-          </li>
-        </ul>
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
   </v-footer>

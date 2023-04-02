@@ -4,7 +4,7 @@ import BaseBtn from '@/components/base/BaseBtn.vue';
 import BaseImage from '@/components/base/BaseImage.vue';
 import LogoImage from '@/assets/images/logo.svg';
 
-const DEMO_URL = 'https://demo-client-3hla6.ondigitalocean.app/';
+const DEMO_URL = 'https://demo.ssasy.net';
 
 const props = defineProps({
   color: {
