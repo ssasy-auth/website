@@ -1,18 +1,55 @@
 <script setup lang="ts">
+import { useDisplay } from 'vuetify/lib/framework.mjs';
 import BaseImage from './base/BaseImage.vue';
 import LogoImage from '@/assets/images/logo.svg'
+
+interface Links {
+  name: string;
+  url: string;
+}
+
+const links: Links[] = [
+  {
+    name: 'Github',
+    url: 'https://github.com/ssasy-auth'
+  }
+]
+
+const { smAndDown } = useDisplay();
+
 </script>
 
 <template>
-  <v-footer app>
-    <span class="mx-1">&copy; ssasy</span>
+  <v-footer id="foot" app absolute>
+    <v-row :class="`pa-1 ${smAndDown ? 'text-center' : '' }`">
+      <!-- ssasy -->
+      <v-col cols="11" md="3" order="2" order-md="1">
+        <base-image :src="LogoImage" alt="ssasy logo" height="20px" class="mx-1" />
+        <span class="mx-1">&copy; 2023 <code>ssasy</code></span>
+      </v-col>
 
-    <v-spacer />
-    
-    <base-image
-      :src="LogoImage"
-      alt="ssasy logo"
-      height="20px"
-      class="mx-1"/>
+      <!-- links -->
+      <v-col cols="11" md="auto" order="1" order-md="2">
+        <ul>
+          <li v-for="link in links" :key="link.name">
+            <a :href="link.url" target="_blank" rel="noopener noreferrer" class="mx-1">
+              {{ link.name }}
+            </a>
+          </li>
+        </ul>
+      </v-col>
+    </v-row>
   </v-footer>
 </template>
+
+<style scoped>
+#foot{
+  min-height: 200px;
+  padding-top: 25px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+</style>
