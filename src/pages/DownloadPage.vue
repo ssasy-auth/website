@@ -2,11 +2,11 @@
 import BasePage from '@/components/base/BasePage.vue';
 import BaseCard from '@/components/base/BaseCard.vue';
 import BaseImageVue from '@/components/base/BaseImage.vue';
-import LogoFirefox from '@/assets/images/logo-firefox.svg';
-import LogoChrome from '@/assets/images/logo-chrome.svg';
-import LogoSafari from '@/assets/images/logo-safari.svg';
-import LogoExplorer from '@/assets/images/logo-explorer.svg';
-import LogoBrave from '@/assets/images/logo-brave.svg';
+import LogoFirefox from '@/assets/images/browsers/logo-firefox.svg';
+import LogoChrome from '@/assets/images/browsers/logo-chrome.svg';
+import LogoSafari from '@/assets/images/browsers/logo-safari.svg';
+import LogoExplorer from '@/assets/images/browsers/logo-explorer.svg';
+import LogoBrave from '@/assets/images/browsers/logo-brave.svg';
 
 interface BrowserItem {
   name: string;
