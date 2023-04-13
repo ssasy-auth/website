@@ -114,7 +114,7 @@ onMounted(async () => {
         cols="auto"
         class="text-center">
         <div id="title">
-          How to {{ isDeveloper ? 'develop' : 'use' }} <code class="brand">ssasy</code>
+          How to {{ isDeveloper ? 'develop with' : 'use' }} <code class="brand">ssasy</code>
         </div>
       </v-col>
 
