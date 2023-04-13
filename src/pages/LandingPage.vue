@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 import { useDisplay } from 'vuetify/lib/framework.mjs';
-import { useMarketingPitch } from '@/composables';
+import { useMarketingPitch, useInstructions } from '@/composables';
 import { Bridge } from '@ssasy-auth/extension';
 import BasePage from '@/components/base/BasePage.vue';
 import BaseCard from '@/components/base/BaseCard.vue';
@@ -11,12 +11,14 @@ import DownloadBtn from '@/components/buttons/DownloadBtn.vue';
 import ScreenshotImage from '@/assets/images/screenshots/light-confirm.png';
 
 const { mdAndUp } = useDisplay();
+const { userInstructions, developerInstructions } = useInstructions();
 const { userPitches, developerPitches } = useMarketingPitch();
 
 const extensionInstalled = ref<boolean>(false);
 const isDeveloper = ref<boolean>(true);
 
 const pitches = computed(() => (isDeveloper.value ? developerPitches.value : userPitches.value));
+const instructions = computed(() => (isDeveloper.value ? developerInstructions.value : userInstructions.value));
 
 onMounted(async () => {
   extensionInstalled.value = await Bridge.isExtensionInstalled();
@@ -68,7 +70,7 @@ onMounted(async () => {
         class="text-center">
         <base-image
           :src="ScreenshotImage"
-          :alt="'Screenshot of SSASy'"
+          :alt="'Screenshot of SSASY'"
           :height="mdAndUp ? '500px' : '350px'" />
       </v-col>
     </v-row>
@@ -79,7 +81,9 @@ onMounted(async () => {
       <v-col
         cols="auto"
         class="text-center">
-        <div id="title">{{ isDeveloper ? 'Developer' : 'User' }} Benefits</div>
+        <div id="title">
+          {{ isDeveloper ? 'Developer' : 'User' }} <br v-if="!mdAndUp"/> Benefits
+        </div>
       </v-col>
 
       <v-divider class="border-opacity-0" />
@@ -102,6 +106,30 @@ onMounted(async () => {
         </base-card>
       </v-col>
     </v-row>
+
+    <v-row
+      id="instruction"
+      justify="center">
+      <v-col
+        cols="auto"
+        class="text-center">
+        <div id="title">
+          How to {{ isDeveloper ? 'develop' : 'use' }} <code class="brand">ssasy</code>
+        </div>
+      </v-col>
+
+      <v-divider class="border-opacity-0 mt-2" />
+
+      <v-col
+        v-for="(instruction, index) in instructions"
+        :key="instruction.title"
+        cols="11">
+        <base-card :outlined="false">
+          <h3>{{index + 1}}. {{ instruction.title }}</h3>
+          <p v-html="instruction.description"></p>
+        </base-card>
+      </v-col>
+    </v-row>
   </base-page>
 </template>
 
@@ -118,8 +146,16 @@ onMounted(async () => {
   font-size: 2rem;
 }
 
+#pitch #instruction {
+  margin-top: 40px;
+}
+
 #pitch #title {
-  font-size: 1.5rem;
+font-size: 1.75rem;
+}
+
+#instruction #title {
+font-size: 1.75rem;
 }
 
 #billboard #subtitle {
