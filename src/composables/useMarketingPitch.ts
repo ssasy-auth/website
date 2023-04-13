@@ -6,7 +6,7 @@ import { ref, computed } from 'vue';
  */
 
 const PRODUCT_NAME = 'ssasy';
-const PRODUCT_NAME_HTML = `<code>${PRODUCT_NAME}</code>`;
+const PRODUCT_NAME_HTML = `<code class="brand">${PRODUCT_NAME}</code>`;
 
 /**
  * The audience for the pitch.

@@ -40,7 +40,7 @@ const { smAndDown } = useDisplay();
           alt="ssasy logo"
           height="20px"
           class="mx-1" />
-        <span class="mx-1">&copy; 2023 <code>ssasy</code></span>
+        <span class="mx-1">&copy; 2023 <code class="brand">ssasy</code></span>
       </v-col>
 
       <!-- links -->

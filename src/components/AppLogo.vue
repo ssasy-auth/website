@@ -18,7 +18,9 @@ const { mdAndUp } = useDisplay();
     <v-col
       v-if="mdAndUp"
       id="logo-name">
-      <code>ssasy</code>
+      <code
+        class="brand"
+        style="color: inherit;">ssasy</code>
     </v-col>
   </v-row>
 </template>
