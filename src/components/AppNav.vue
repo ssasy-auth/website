@@ -19,7 +19,6 @@ onMounted(async () => {
   <v-app-bar
     app
     flat
-    color="transparent"
     class="bar-container">
     <router-link
       class="bar-logo hide-link mt-2 pa-1"
@@ -30,8 +29,10 @@ onMounted(async () => {
     <v-spacer />
 
     <div v-if="!smAndDown">
-      <demo-btn v-if="extensionInstalled"/>
-      <download-btn v-else />
+      <download-btn
+        v-if="!extensionInstalled"
+        class="mx-1"/>
+      <demo-btn class="mx-1"/>
     </div>
   </v-app-bar>
 </template>

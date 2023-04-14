@@ -53,13 +53,19 @@ onMounted(async () => {
         <div
           id="call-to-action"
           class="mt-2 mx-auto">
-
-          <demo-btn
-            v-if="extensionInstalled"
-            block />
-          <download-btn
-            v-else
-            block />
+          <v-row justify-md="space-between">
+            <v-col
+              v-if="!extensionInstalled"
+              cols="12"
+              md="6">
+              <download-btn block/>
+            </v-col>
+            <v-col
+              cols="12"
+              :md="extensionInstalled ? 12 : 6">
+              <demo-btn block/>
+            </v-col>
+          </v-row>
         </div>
       </v-col>
 
