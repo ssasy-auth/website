@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { useDisplay } from 'vuetify/lib/framework.mjs';
-import BaseImage from './base/BaseImage.vue';
-import LogoImage from '@/assets/images/logo.svg'
 
 interface Links {
   name: string;
@@ -10,12 +8,16 @@ interface Links {
 
 const links: Links[] = [
   {
-    name: 'Demo',
-    url: 'https://demo.ssasy.net'
-  },
-  {
     name: 'Github',
     url: 'https://github.com/ssasy-auth'
+  },
+  {
+    name: 'Docs',
+    url: 'https://github.com/ssasy-auth/core#readme'
+  },
+  {
+    name: 'Try Demo',
+    url: 'https://demo.ssasy.net'
   }
 ]
 
@@ -35,12 +37,9 @@ const { smAndDown } = useDisplay();
         md="3"
         order="2"
         order-md="1">
-        <base-image
-          :src="LogoImage"
-          alt="ssasy logo"
-          height="20px"
-          class="mx-1" />
-        <span class="mx-1">&copy; 2023 <code class="brand">ssasy</code></span>
+        <code
+          class="brand"
+          style="padding-bottom: 15px;">ssasy</code> &copy; 2023
       </v-col>
 
       <!-- links -->
