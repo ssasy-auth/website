@@ -24,6 +24,10 @@ const props = defineProps({
     type: Boolean,
     default: undefined
   },
+  extraLarge: {
+    type: Boolean,
+    default: undefined
+  },
   /* styles */
   flat: {
     type: Boolean,
@@ -85,12 +89,14 @@ const getButtonStyle: ComputedRef<ButtonStyle | undefined> = computed(() => {
   }
 });
 
-type ButtonSize = 'small' | 'medium' | 'large';
+type ButtonSize = 'small' | 'medium' | 'large' | 'x-large';
 const getButtonSize: ComputedRef<ButtonSize> = computed(() => {
   if (props.small) {
     return 'small';
   } else if (props.large) {
     return 'large';
+  } else if (props.extraLarge) {
+    return 'x-large';
   } else {
     return 'medium';
   }

@@ -14,6 +14,10 @@ const props = defineProps({
   block: {
     type: Boolean,
     default: false
+  },
+  extraLarge: {
+    type: Boolean,
+    default: undefined
   }
 })
 
@@ -23,7 +27,8 @@ const { sendTo } = useExtenralWebsite();
 
 <template>
   <base-btn
-    large
+    :large="props.extraLarge !== true"
+    :extra-large="props.extraLarge === true"
     :color="props.color"
     :block="props.block"
     @click="sendTo(DEMO_URL)">

@@ -148,6 +148,28 @@ onMounted(async () => {
           class="border-opacity-5 mt-2" />
       </v-col>
     </v-row>
+
+    <v-divider class="border-opacity-10 mt-2" />
+
+    <base-card
+      id="section"
+      :outlined="false">
+      <v-row justify="center">
+        <v-col
+          cols="auto"
+          class="text-center">
+          <div id="title">
+            Curious about the <code class="brand">ssasy</code> extension?
+          </div>
+        </v-col>
+        
+        <v-divider class="border-opacity-0 mt-2" />
+        
+        <v-col cols="auto">
+          <demo-btn extra-large />
+        </v-col>
+      </v-row>
+    </base-card>
   </base-page>
 </template>
 
