@@ -1,26 +1,32 @@
 import { ref, computed } from 'vue';
 
 /**
- * @file useMarketingPitch.ts
- * @description A resuable composition function that returns marketing pitches for ssasy, a secure and usable user authentication library and browser extension.
+ * @file useMarketing.ts
+ * @description A resuable composition function that returns marketing content.
  */
 
 const PRODUCT_NAME = 'ssasy';
 const PRODUCT_NAME_HTML = `<code class="brand">${PRODUCT_NAME}</code>`;
+const LIBRARY_CORE = `<a href="https://github.com/ssasy-auth/core" target="_blank" rel="noopener noreferrer">@${PRODUCT_NAME}/core</a> repository`;
+const LIBRARY_EXTENSION = `<a href="https://github.com/ssasy-auth/extension" target="_blank" rel="noopener noreferrer">@${PRODUCT_NAME}/extension</a> repository`;
+const LIBRARY_BRIDGE = `<a href="https://github.com/ssasy-auth/extension/blob/main/src/bridge/README.md" target="_blank" rel="noopener noreferrer">@${PRODUCT_NAME}/bridge</a> repository`;
 
 /**
  * The audience for the pitch.
  */
-export type MarketingAudience = 'user' | 'developer';
+export type Audience = 'user' | 'developer';
 
-/**
- * The pitch for the product.
- */
-export interface MarketingPitch {
+interface Content {
   /**
    * The audience for this pitch.
    */
-  audience: MarketingAudience;
+  audience: Audience;
+}
+
+/**
+ * Marketing pitch for ssasy
+ */
+export interface Pitch extends Content {
   /**
    * The problem the pitch is trying to solve. 
    * 
@@ -43,12 +49,34 @@ export interface MarketingPitch {
   technical?: string;
 }
 
-const productPitches: MarketingPitch[] = [
+/**
+ * Instruction for ssasy
+ */
+export interface Instruction extends Content {
+  /**
+   * The title of the instruction.
+   */
+  title: string;
+  /**
+   * The description of the instruction.
+   */
+  description: string;
+  /**
+   * The image for the instruction.
+   */
+  image?: string;
+  /**
+   * The code snippet for an instruction.
+   */
+  code?: string;
+}
+
+const productPitches: Pitch[] = [
   {
     audience: 'developer',
     problem: 'No more complex user authentication flows',
-    solution: `Security should be easy. ${PRODUCT_NAME_HTML} provides two libraries to help you implement user authentication in your web application. The first library allows you to authenticate users on the client and server side. The second library allows you to initiate authentication flows from the browser extension.`,
-    technical: `Security should be easy. ${PRODUCT_NAME_HTML} provides two libraries to help you implement user authentication in your web application. The first library uses the WebCrypto standard and AES256 keys for symmetric encryption, and ECDH for asymmetric encryption. This simplifies the authentication process for your users, and allows you to authenticate users on the client and server side. The second library allows you to initiate authentication flows from the browser extension.`
+    solution: `Security should be easy. ${PRODUCT_NAME_HTML} provides two libraries to help you implement user authentication in your web application. The first library, ${LIBRARY_CORE}, allows you to authenticate users on the client and server side. The second library, ${LIBRARY_BRIDGE}, allows you to initiate authentication flows from the browser extension.`,
+    technical: `Security should be easy. ${PRODUCT_NAME_HTML} provides two libraries to help you implement user authentication in your web application. The first library, ${LIBRARY_CORE}, uses the WebCrypto standard and AES256 keys for symmetric encryption, and ECDH for asymmetric encryption. This simplifies the authentication process for your users, and allows you to authenticate users on the client and server side. The second library, ${LIBRARY_BRIDGE}, allows you to initiate authentication flows from the browser extension.`
   },
   {
     audience: 'developer',
@@ -82,14 +110,52 @@ const productPitches: MarketingPitch[] = [
   }
 ]
 
-const useMarketingPitch = () => {
-  const _pitches = ref<MarketingPitch[]>(productPitches);
+const productInstructions: Instruction[] = [
+  {
+    audience: 'user',
+    title: 'Install the browser extension',
+    description: `The browser extension allows you to authenticate to web applications that support ${PRODUCT_NAME_HTML}.`
+  },
+  {
+    audience: 'user',
+    title: 'Setup extension',
+    description: `${PRODUCT_NAME_HTML} uses a cryptographic key to authenticate you to web applications. Follow the instructions in the browser extension to create or import your cryptographic key.`
+  },
+  {
+    audience: 'user',
+    title: 'Authenticate to web applications',
+    description: `When you visit a web application that supports ${PRODUCT_NAME_HTML}, you will be prompted to authenticate. Follow the instructions in the browser extension to authenticate to the web application.`
+  },
+  {
+    audience: 'developer',
+    title: 'Install the client library',
+    description: 'The client library allows you to authenticate users on the client side in a usable and secure manner.'
+  },
+  {
+    audience: 'developer',
+    title: 'Setup your cryptographic key and authentication flow',
+    description: `${PRODUCT_NAME_HTML} uses a cryptographic key to authenticate users to web applications. Checkout the ${LIBRARY_CORE} to learn how to create, import and manage your cryptographic key.`
+  },
+  {
+    audience: 'developer',
+    title: 'Setup your client-side authentication flow',
+    description: `${PRODUCT_NAME_HTML} uses a browser extension to authenticate users to web applications. The browser extension exposes a client-side API that allows web applications to request public keys and initiate authentication flows. Checkout the ${LIBRARY_BRIDGE} to learn how to use the client-side API.`
+  },
+  {
+    audience: 'developer',
+    title: 'You\'re all set!',
+    description: `Enable your users to authenticate in a usable, secure and self-sovereign manner with ${PRODUCT_NAME_HTML}.`
+  }
+]
 
-  const userPitches = computed<MarketingPitch[]>(() => {
+const useMarketingPitch = () => {
+  const _pitches = ref<Pitch[]>(productPitches);
+
+  const userPitches = computed<Pitch[]>(() => {
     return _pitches.value.filter(pitch => pitch.audience === 'user');
   });
 
-  const developerPitches = computed<MarketingPitch[]>(() => {
+  const developerPitches = computed<Pitch[]>(() => {
     return _pitches.value.filter(pitch => pitch.audience === 'developer');
   });
 
@@ -99,6 +165,21 @@ const useMarketingPitch = () => {
   }
 }
 
+const useInstructions = () => {
+  const instructions = ref<Instruction[]>(productInstructions);
+
+  const userInstructions = computed(() => instructions.value.filter(instruction => instruction.audience === 'user'));
+
+  const developerInstructions = computed(() => instructions.value.filter(instruction => instruction.audience === 'developer'));
+
+  return {
+    instructions,
+    userInstructions,
+    developerInstructions
+  }
+}
+
 export {
-  useMarketingPitch
+  useMarketingPitch,
+  useInstructions
 }
