@@ -4,6 +4,9 @@
  */
 
 import { ref, computed } from 'vue';
+import ExtensionSetupGif from '@/assets/images/gifs/demo-setup.gif';
+import ExtensionRegisterGif from '@/assets/images/gifs/demo-register.gif';
+import ExtensionLoginGif from '@/assets/images/gifs/demo-login.gif';
 
 const LIBRARY_NAME = 'ssasy';
 const LIBRARY_NAME_HTML = `<code class="brand">${LIBRARY_NAME}</code>`;
@@ -126,17 +129,20 @@ const productInstructions: Instruction[] = [
   {
     audience: 'user',
     title: 'Setup browser extension',
-    description: `${LIBRARY_NAME_HTML} uses a cryptographic key to authenticate you to web applications. Follow the instructions in the browser extension to create or import your cryptographic key.`
+    description: `${LIBRARY_NAME_HTML} uses a cryptographic key to authenticate you to web applications. Follow the instructions in the browser extension to create or import your cryptographic key.`,
+    image: ExtensionSetupGif
   },
   {
     audience: 'user',
     title: 'Register to web applications',
-    description: `The ${LIBRARY_NAME_HTML} extension allows you to register to web applications in 2 easy steps.`
+    description: `The ${LIBRARY_NAME_HTML} extension allows you to register to web applications in 2 easy steps.`,
+    image: ExtensionRegisterGif
   },
   {
     audience: 'user',
     title: 'Authenticate to web applications',
-    description: `When you visit a web application that supports ${LIBRARY_NAME_HTML}, you will be prompted to authenticate. Follow the instructions in the browser extension to authenticate to the web application.`
+    description: `When you visit a web application that supports ${LIBRARY_NAME_HTML}, you will be prompted to authenticate. Follow the instructions in the browser extension to authenticate to the web application.`,
+    image: ExtensionLoginGif
   },
   {
     audience: 'developer',
