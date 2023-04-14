@@ -8,6 +8,7 @@ import BaseCard from '@/components/base/BaseCard.vue';
 import BaseImage from '@/components/base/BaseImage.vue';
 import DemoBtn from '@/components/buttons/DemoBtn.vue';
 import DownloadBtn from '@/components/buttons/DownloadBtn.vue';
+import InstructionCard from '@/components/cards/InstructionCard.vue';
 import ScreenshotImage from '@/assets/images/screenshots/light-confirm.png';
 
 const { mdAndUp } = useDisplay();
@@ -130,10 +131,13 @@ onMounted(async () => {
         v-for="(instruction, index) in instructions"
         :key="instruction.title"
         cols="11">
-        <base-card :outlined="false">
-          <h3>{{index + 1}}. {{ instruction.title }}</h3>
-          <p v-html="instruction.description"></p>
-        </base-card>
+        <instruction-card
+          :instruction="instruction"
+          :index="index + 1" />
+
+        <v-divider
+          v-if="index + 1 < instructions.length"
+          class="border-opacity-5 mt-2" />
       </v-col>
     </v-row>
   </base-page>
