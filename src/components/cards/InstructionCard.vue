@@ -30,12 +30,14 @@ const props = defineProps({
 
     <v-col
       v-if="props.instruction.code"
+      cols="12"
       md="8">
       <code-card :code="props.instruction.code" />
     </v-col>
 
     <v-col
       v-if="props.instruction.image"
+      cols="12"
       md="8">
       <base-image
         :src="props.instruction.image"
