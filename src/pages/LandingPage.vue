@@ -20,6 +20,7 @@ const isDeveloper = ref<boolean>(true);
 
 const pitches = computed(() => (isDeveloper.value ? developerPitches.value : userPitches.value));
 const instructions = computed(() => (isDeveloper.value ? developerInstructions.value : userInstructions.value));
+const color = computed(() => (isDeveloper.value ? 'primary' : 'success'));
 
 onMounted(async () => {
   extensionInstalled.value = await Bridge.isExtensionInstalled();
@@ -40,15 +41,14 @@ onMounted(async () => {
         order-md="1"
         :class="mdAndUp ? '' : 'text-center'">
         <div id="title">
-          Supercharge your website's user authentication
+          Self-sovereign authentication for the web
         </div>
         <div
           id="subtitle"
           class="text-grey-darken-3 mt-1">
-          A secure, usable and scalable alternative to existing password
+          A secure and usable alternative to passwords
           and federation-based user authentication schemes that leverages
-          public key cryptography to enable a seamless developer and
-          user experience.
+          public key cryptography to enable a scalable user and developer experience.
         </div>
         
         <div
@@ -82,14 +82,14 @@ onMounted(async () => {
       </v-col>
     </v-row>
 
-    <v-row
-      id="pitch"
-      justify="center">
+    <v-row justify="center">
       <v-col
         cols="auto"
         class="text-center">
         <div id="title">
-          {{ isDeveloper ? 'Developer' : 'User' }} <br v-if="!mdAndUp"/> Benefits
+          View as a <br v-if="!mdAndUp" /> <i
+            :class="`text-${color}`"
+            style="font-weight: bolder; text-decoration: underline dashed;">{{ isDeveloper ? 'developer' : 'user' }}</i>
         </div>
       </v-col>
 
@@ -99,6 +99,16 @@ onMounted(async () => {
           v-model="isDeveloper"
           inset
           color="primary" />
+      </v-col>
+    </v-row>
+
+    <v-row id="section">
+      <v-col
+        cols="auto"
+        class="text-center">
+        <div id="title">
+          Why use <code class="brand">ssasy</code>?
+        </div>
       </v-col>
 
       <v-divider class="border-opacity-0 mt-2" />
@@ -114,14 +124,12 @@ onMounted(async () => {
       </v-col>
     </v-row>
 
-    <v-row
-      id="instruction"
-      justify="center">
+    <v-row id="section">
       <v-col
         cols="auto"
         class="text-center">
         <div id="title">
-          How to {{ isDeveloper ? 'develop with' : 'use' }} <code class="brand">ssasy</code>
+          How to use <code class="brand">ssasy</code>!
         </div>
       </v-col>
 
@@ -144,45 +152,47 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-#billboard {
-  padding: 25px 0 40px 0;
+#title {
+  font-size: 1.75rem;
+  font-weight: bold;
 }
 
-#title {
-  font-weight: bold;
+#billboard {
+  padding: 25px 0 40px 0;
 }
 
 #billboard #title {
   font-size: 2rem;
 }
 
-#pitch #instruction {
-  margin-top: 40px;
-}
-
-#pitch #title {
-font-size: 1.75rem;
-}
-
-#instruction #title {
-font-size: 1.75rem;
-}
-
 #billboard #subtitle {
   font-size: 1.25rem;
+}
+
+#section {
+  margin: 40px 0;
 }
 
 @media (min-width: 960px) {
   #billboard {
     padding: 100px 0;
   }
-
+  
   #billboard #title {
     font-size: 3rem;
   }
-
+  
   #billboard #subtitle {
     font-size: 1.5rem;
+  }
+
+  #section {
+    margin: 75px 0;
+  }
+
+  #section #title {
+    font-size: 2.5rem;
+    margin: 15px 0;
   }
 }
 </style>
