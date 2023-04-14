@@ -14,15 +14,19 @@ const LIBRARY_CORE = '<a href="https://github.com/ssasy-auth/core" target="_blan
 const LIBRARY_BRIDGE = '<a href="https://github.com/ssasy-auth/extension/blob/main/src/bridge/README.md" target="_blank" rel="noopener noreferrer">@ssasy-auth/extension</a> repository';
 
 /**
- * The audience for the pitch.
+ * The audience for a piece of content.
  */
-export type Audience = 'user' | 'developer';
+export type Audience = 'user' | 'developer' | 'all';
 
 interface Content {
   /**
-   * The audience for this pitch.
+   * The audience for this content.
    */
   audience: Audience;
+  /**
+   * The image for this content.
+   */
+  image?: string;
 }
 
 /**
@@ -77,10 +81,6 @@ export interface Instruction extends Content {
    */
   description: string;
   /**
-   * The image for the instruction.
-   */
-  image?: string;
-  /**
    * The code snippet for an instruction.
    */
   code?: Code;
@@ -90,13 +90,13 @@ const productPitches: Pitch[] = [
   {
     audience: 'developer',
     problem: 'No more complex user authentication flows',
-    solution: `Security should be easy. ${LIBRARY_NAME_HTML} provides two libraries to help you implement user authentication in your web application. The first library, ${LIBRARY_CORE}, allows you to authenticate users on the client and server side. The second library, ${LIBRARY_BRIDGE}, allows you to initiate authentication flows from the browser extension.`,
+    solution: `Security should be easy. With ${LIBRARY_NAME_HTML}, you can authenticate your users in two simple lines of code.`,
     technical: `Security should be easy. ${LIBRARY_NAME_HTML} provides two libraries to help you implement user authentication in your web application. The first library, ${LIBRARY_CORE}, uses the WebCrypto standard and AES256 keys for symmetric encryption, and ECDH for asymmetric encryption. This simplifies the authentication process for your users, and allows you to authenticate users on the client and server side. The second library, ${LIBRARY_BRIDGE}, allows you to initiate authentication flows from the browser extension.`
   },
   {
     audience: 'developer',
-    problem: 'No more handling user credentials',
-    solution: `User credentials paint a target on your application. ${LIBRARY_NAME_HTML} allows you to authenticate users without handling user credentials thanks to public key cryptography, a cryptographic protocol that allows two parties to exchange messages without the need to share their sensitive credentials.`,
+    problem: 'No need to handle sensistive user credentials',
+    solution: `User credentials, like passwords, paint a target on your application. ${LIBRARY_NAME_HTML} allows you to authenticate users without handling user credentials thanks to public key cryptography, a cryptographic protocol that allows two parties to exchange messages without the need to share their sensitive credentials.`,
     technical: `Traditional user authentication methods require applications to store and handle sensitive user credentials, which poses a significant security threat. However, with ${LIBRARY_NAME_HTML}, you can simplify user authentication and improve application security by eliminating the need to store and handle sensitive user credentials. ${LIBRARY_NAME_HTML} uses public key cryptography to securely authenticate users without storing their credentials, ensuring maximum protection for your application. This not only streamlines the authentication process for your users, but also eliminates the risk of credential theft or leaks, making your application more secure than ever before.`
   },
   {
@@ -107,8 +107,13 @@ const productPitches: Pitch[] = [
   },
   {
     audience: 'user',
-    problem: 'No more remembering passwords',
-    solution: `Good passwords are hard to remember especially when you have to remember them for multiple applications. ${LIBRARY_NAME_HTML} enables a one-stop login experience for all your applications (that support ${LIBRARY_NAME_HTML}).`,
+    problem: 'You are in control',
+    solution: `With ${LIBRARY_NAME_HTML}, nothing happens without your consent, your private key never leaves your device and your data is never tracked or collected.`
+  },
+  {
+    audience: 'user',
+    problem: 'No more forgetting passwords',
+    solution: `Good passwords are hard to remember especially when you have to remember a bunch of them! ${LIBRARY_NAME_HTML} offers a one-stop login experience for all your applications (that support ${LIBRARY_NAME_HTML}).`,
     technical: `${LIBRARY_NAME_HTML} leverages public key cryptography to securely authenticate users across multiple applications, eliminating the need for users to remember multiple passwords. When a user logs in with ${LIBRARY_NAME_HTML}, they generate a unique key pair, with the private key stored locally and the public key registered with the applications that support ${LIBRARY_NAME_HTML}. When the user attempts to authenticate with a supported application, ${LIBRARY_NAME_HTML} uses their private key to generate a digital signature that the application verifies with the user's registered public key. This provides a secure and seamless authentication experience for the user, regardless of which supported application they are logging in to.`
   },
   {
@@ -119,9 +124,14 @@ const productPitches: Pitch[] = [
   },
   {
     audience: 'user',
-    problem: 'No hassle with security tokens',
+    problem: 'No more physical security tokens',
     solution: `Physical security tokens allow you to login to applications without having to remember your password. However, this means you have to carry a physical security token with you at all times (and they are not cheap). ${LIBRARY_NAME_HTML} works with your existing browser extension to provide a one-stop login experience for all your applications.`,
     technical: `Physical security tokens can be costly and inconvenient for users. ${LIBRARY_NAME_HTML} eliminates this need by working with the user's existing browser extension to provide a seamless and secure one-stop login experience for all their applications. When a user logs in with ${LIBRARY_NAME_HTML}, they generate a unique key pair, with the private key stored locally and the public key registered with the applications that support ${LIBRARY_NAME_HTML}. When the user attempts to authenticate with a supported application, ${LIBRARY_NAME_HTML} uses their private key to generate a digital signature that the application verifies with the user's registered public key. This process is seamlessly integrated with the user's existing browser extension, eliminating the need for physical security tokens and making the authentication process more convenient and secure.`
+  },
+  {
+    audience: 'all',
+    problem: 'This project is open-source',
+    solution: `${LIBRARY_NAME_HTML} is open-source which means that you can inspect the code and verify that your data is in good hands. You can also contribute to ${LIBRARY_NAME_HTML} and help make it better by submitting feedback, bug reports and code contributions.`
   }
 ]
 
@@ -215,7 +225,8 @@ const productInstructions: Instruction[] = [
   {
     audience: 'developer',
     title: 'You\'re all set!',
-    description: `Enable your users to authenticate in a usable, secure and self-sovereign manner with ${LIBRARY_NAME_HTML}.`
+    description: `Enable your users to authenticate in a usable, secure and self-sovereign manner with ${LIBRARY_NAME_HTML}.`,
+    image: ExtensionLoginGif
   }
 ]
 
@@ -223,11 +234,11 @@ const useMarketingPitch = () => {
   const _pitches = ref<Pitch[]>(productPitches);
 
   const userPitches = computed<Pitch[]>(() => {
-    return _pitches.value.filter(pitch => pitch.audience === 'user');
+    return _pitches.value.filter(pitch => pitch.audience === 'user' || pitch.audience === 'all');
   });
 
   const developerPitches = computed<Pitch[]>(() => {
-    return _pitches.value.filter(pitch => pitch.audience === 'developer');
+    return _pitches.value.filter(pitch => pitch.audience === 'developer' || pitch.audience === 'all');
   });
 
   return {
@@ -239,9 +250,9 @@ const useMarketingPitch = () => {
 const useInstructions = () => {
   const instructions = ref<Instruction[]>(productInstructions);
 
-  const userInstructions = computed(() => instructions.value.filter(instruction => instruction.audience === 'user'));
+  const userInstructions = computed(() => instructions.value.filter(instruction => instruction.audience === 'user' || instruction.audience === 'all'));
 
-  const developerInstructions = computed(() => instructions.value.filter(instruction => instruction.audience === 'developer'));
+  const developerInstructions = computed(() => instructions.value.filter(instruction => instruction.audience === 'developer' || instruction.audience === 'all'));
 
   return {
     instructions,
