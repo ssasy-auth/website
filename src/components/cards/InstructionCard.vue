@@ -40,6 +40,7 @@ const props = defineProps({
       cols="12"
       md="8">
       <base-image
+        :lazy="true"
         :src="props.instruction.image"
         :alt="'Screenshot of SSASY'"
         width="100%" />
