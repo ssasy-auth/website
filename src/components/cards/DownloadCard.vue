@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import BaseCard from '@/components/base/BaseCard.vue';
 import BaseImage from '@/components/base/BaseImage.vue';
 import BaseBtn from '@/components/base/BaseBtn.vue';
+import { useExtenralWebsite } from '@/composables';
 import type { Browser } from '@/composables';
 import type { PropType } from 'vue';
 
@@ -14,6 +15,7 @@ const props = defineProps({
 })
 
 const browser = ref<Browser>(props.browser)
+const { sendTo } = useExtenralWebsite();
 
 </script>
 
@@ -36,7 +38,7 @@ const browser = ref<Browser>(props.browser)
         v-if="browser.download"
         block
         large
-        :to="browser.download">
+        @click="sendTo(browser.download)">
         Download
       </base-btn>
 
