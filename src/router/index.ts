@@ -10,6 +10,11 @@ const router = createRouter({
       component: LandingPage
     },
     {
+      path: '/download',
+      name: 'download',
+      component: () => import('@/pages/DownloadPage.vue')
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'wildcard',
       component: () => import('@/pages/_.vue')

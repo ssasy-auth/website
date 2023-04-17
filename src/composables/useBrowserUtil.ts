@@ -2,10 +2,10 @@ import { computed } from 'vue';
 import FirefoxLogo from '@/assets/images/browsers/logo-firefox.svg';
 import ChromeLogo from '@/assets/images/browsers/logo-chrome.svg';
 import SafariLogo from '@/assets/images/browsers/logo-safari.svg';
-import ExplorerLogo from '@/assets/images/browsers/logo-explorer.svg';
+import EdgeLogo from '@/assets/images/browsers/logo-edge.svg';
 import BraveLogo from '@/assets/images/browsers/logo-brave.svg';
 
-interface Browser {
+export interface Browser {
   /**
    * Browser name
    */
@@ -38,9 +38,9 @@ const SafariBrowser: Browser = {
   download: undefined
 }
 
-const ExplorerBrowser: Browser = {
-  name: 'Explorer',
-  logo: ExplorerLogo,
+const EdgeBrowser: Browser = {
+  name: 'Edge',
+  logo: EdgeLogo,
   download: undefined
 }
 
@@ -51,19 +51,19 @@ const BraveBrowser: Browser = {
 }
 
 export function useBrowserUtil() {
-  const isChrome = computed<boolean>(() => {
-    return navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
-  })
-
   const isFirefox = computed<boolean>(() => {
     return navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+  })
+  
+  const isChrome = computed<boolean>(() => {
+    return navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
   })
 
   const isSafari = computed<boolean>(() => {
     return navigator.userAgent.toLowerCase().indexOf('safari') > -1;
   })
 
-  const isExplorer = computed<boolean>(() => {
+  const isEdge = computed<boolean>(() => {
     return navigator.userAgent.toLowerCase().indexOf('msie') > -1;
   })
 
@@ -72,24 +72,24 @@ export function useBrowserUtil() {
   })
 
   function getCurrentBrowser(): Browser | undefined {
-    if (isChrome.value) {
-      return ChromeBrowser;
-    } 
-    
-    else if (isFirefox.value) {
+    if (isFirefox.value) {
       return FirefoxBrowser;
     } 
     
-    else if (isSafari.value) {
-      return SafariBrowser;
+    else if (isChrome.value) {
+      return ChromeBrowser;
     }
 
-    else if (isExplorer.value) {
-      return ExplorerBrowser;
+    else if (isEdge.value) {
+      return EdgeBrowser;
     }
 
     else if (isBrave.value) {
       return BraveBrowser;
+    }
+
+    else if (isSafari.value) {
+      return SafariBrowser;
     }
     
     else {
@@ -97,13 +97,23 @@ export function useBrowserUtil() {
     }
   }
 
+  function getAllBrowsers(): Browser[] {
+    return [
+      FirefoxBrowser,
+      ChromeBrowser,
+      EdgeBrowser,
+      BraveBrowser,
+      SafariBrowser
+    ];
+  }
+
   function getSupportedBrowsers(): Browser[] {
     return [
       FirefoxBrowser,
       ChromeBrowser,
-      SafariBrowser,
-      ExplorerBrowser,
-      BraveBrowser
+      EdgeBrowser,
+      BraveBrowser,
+      SafariBrowser
     ].filter(browser => browser.download !== undefined);
   }
 
@@ -111,9 +121,10 @@ export function useBrowserUtil() {
     isChrome,
     isFirefox,
     isSafari,
-    isExplorer,
+    isEdge,
     isBrave,
     getCurrentBrowser,
+    getAllBrowsers,
     getSupportedBrowsers
   }
 }

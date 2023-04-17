@@ -27,9 +27,8 @@ const currentBrowser = getCurrentBrowser();
     large
     :color="props.color"
     :block="props.block"
-    :disabled="!currentBrowser?.download"
     @click="sendTo(currentBrowser?.download)">
-    Download extension
+    Download
     <base-image
       v-if="currentBrowser"
       :src="currentBrowser.logo"
@@ -44,8 +43,8 @@ const currentBrowser = getCurrentBrowser();
     large
     :color="props.color"
     :block="props.block"
-    :disabled="true">
-    Coming soon to {{ currentBrowser?.name }}
+    to="/download">
+    Download
     <base-image
       v-if="currentBrowser"
       :src="currentBrowser.logo"

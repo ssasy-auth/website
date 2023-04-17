@@ -14,7 +14,8 @@ const props = defineProps({
     class="pa-1">
     <v-col
       v-if="props.title"
-      class="text-center my-1">
+      class="text-center my-1"
+      style="padding-top: 50px;">
       <h1>{{ props.title }}</h1>
     </v-col>
 

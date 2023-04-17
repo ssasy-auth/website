@@ -33,11 +33,19 @@ const props = defineProps({
   },
   flat: {
     type: Boolean,
-    default: true
+    default: undefined
+  },
+  tonal: {
+    type: Boolean,
+    default: undefined
+  },
+  text: {
+    type: Boolean,
+    default: undefined
   },
   outlined: {
     type: Boolean,
-    default: true
+    default: undefined
   },
   loading: {
     type: Boolean,
@@ -57,8 +65,18 @@ type CardStyle = 'flat' | 'outlined' | 'text' | 'elevated' | 'tonal' | 'plain';
 const getCardStyle: ComputedRef<NonNullable<CardStyle> | undefined> = computed(() => {
   if(props.outlined === true){
     return 'outlined';
-  } else {
-    return undefined
+  } 
+  else if(props.flat === true){
+    return 'flat';
+  }
+  else if(props.text === true){
+    return 'text';
+  }
+  else if(props.tonal === true){
+    return 'tonal';
+  }
+  else {
+    return 'plain'
   }
 });
 
