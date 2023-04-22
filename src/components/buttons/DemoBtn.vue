@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useExtenralWebsite } from '@/composables';
 import BaseBtn from '@/components/base/BaseBtn.vue';
+import BaseLink from '@/components/base/BaseLink.vue';
 import BaseImage from '@/components/base/BaseImage.vue';
 import LogoImage from '@/assets/images/logo.svg';
 
@@ -21,22 +21,21 @@ const props = defineProps({
   }
 })
 
-const { sendTo } = useExtenralWebsite();
-
 </script>
 
 <template>
-  <base-btn
-    :large="props.extraLarge !== true"
-    :extra-large="props.extraLarge === true"
-    :color="props.color"
-    :block="props.block"
-    @click="sendTo(DEMO_URL)">
-    Try demo
-    <base-image
-      :src="LogoImage"
-      alt="app logo"
-      height="20px"
-      class="mx-1" />
-  </base-btn>
+  <base-link :href="DEMO_URL">
+    <base-btn
+      :large="props.extraLarge !== true"
+      :extra-large="props.extraLarge === true"
+      :color="props.color"
+      :block="props.block">
+      Try demo
+      <base-image
+        :src="LogoImage"
+        alt="app logo"
+        height="20px"
+        class="mx-1" />
+    </base-btn>
+  </base-link>
 </template>
