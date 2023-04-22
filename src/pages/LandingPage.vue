@@ -117,7 +117,7 @@ onMounted(async () => {
         v-for="pitch in pitches"
         :key="pitch.problem"
         cols="11">
-        <base-card :outlined="false">
+        <base-card>
           <h3>{{ pitch.problem }}</h3>
           <p v-html="pitch.solution"></p>
         </base-card>
@@ -151,9 +151,7 @@ onMounted(async () => {
 
     <v-divider class="border-opacity-10 mt-2" />
 
-    <base-card
-      id="section"
-      :outlined="false">
+    <base-card id="section">
       <v-row justify="center">
         <v-col
           cols="auto"
