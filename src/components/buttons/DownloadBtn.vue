@@ -34,7 +34,7 @@ const currentBrowser = getCurrentBrowser();
         v-if="currentBrowser"
         :src="currentBrowser.logo"
         :alt="`${currentBrowser.name} icon`"
-        height="20px"
+        height="25px"
         class="mx-1" />
     </base-btn>
   </base-link>

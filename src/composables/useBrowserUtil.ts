@@ -57,18 +57,27 @@ export function useBrowserUtil() {
   function getCurrentBrowserAgent(): BrowserName | undefined {
     const agent = navigator.userAgent.toLowerCase();
 
-    switch (true) {
-    case agent.indexOf('firefox') > -1:
+    if(agent.indexOf('firefox') > -1) {
       return 'Firefox';
-    case agent.indexOf('edg/') > -1 || agent.indexOf('msie') > -1 || (agent.indexOf('/') > -1 && agent.indexOf('Edg') > -1):
+    }
+
+    else if(agent.indexOf('edg/') > -1 || agent.indexOf('msie') > -1 || (agent.indexOf('/') > -1 && agent.indexOf('Edg') > -1)) {
       return 'Edge';
-    case agent.indexOf('brave') > -1 || (navigator as any).brave:
+    }
+
+    else if((navigator as any).brave) {
       return 'Brave';
-    case agent.indexOf('chrome') > -1: // ! position is important: must be after 'brave' and 'edge' checks
+    }
+
+    else if(agent.indexOf('chrome') > -1) {
       return 'Chrome';
-    case agent.indexOf('safari') > -1:
+    }
+
+    else if(agent.indexOf('safari') > -1) {
       return 'Safari';
-    default:
+    }
+
+    else {
       return undefined;
     }
   }
@@ -78,21 +87,8 @@ export function useBrowserUtil() {
    */
   function getCurrentBrowser(): Browser | undefined {
     const agent: BrowserName | undefined = getCurrentBrowserAgent();
-
-    switch (agent) {
-    case 'Firefox':
-      return browsers.find(browser => browser.name === 'Firefox');
-    case 'Edge':
-      return browsers.find(browser => browser.name === 'Edge');
-    case 'Brave':
-      return browsers.find(browser => browser.name === 'Chrome');
-    case 'Chrome':
-      return browsers.find(browser => browser.name === 'Chrome');
-    case 'Safari':
-      return browsers.find(browser => browser.name === 'Safari');
-    default:
-      return undefined;
-    }
+    
+    return browsers.find(browser => browser.name === agent);
   }
 
   /**
