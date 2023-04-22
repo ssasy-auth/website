@@ -1,6 +1,6 @@
 {
   "name": "website",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "repository": "ssasy-auth/website",
   "scripts": {
     "dev": "vite",
