@@ -23,7 +23,7 @@ onMounted(async () => {
     <router-link
       class="bar-logo hide-link mt-2 pa-1"
       to="/">
-      <app-logo />
+      <app-logo :hide-name="smAndDown" />
     </router-link>
 
     <v-spacer />

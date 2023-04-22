@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useDisplay } from 'vuetify/lib/framework.mjs';
+import AppLogo from './AppLogo.vue';
 
 interface Links {
   name: string;
@@ -7,6 +8,10 @@ interface Links {
 }
 
 const links: Links[] = [
+  {
+    name: '(Source Code)',
+    url: 'https://github.com/ssasy-auth/website'
+  },
   {
     name: 'Github',
     url: 'https://github.com/ssasy-auth'
@@ -37,9 +42,10 @@ const { smAndDown } = useDisplay();
         md="3"
         order="2"
         order-md="1">
-        <code
-          class="brand"
-          style="padding-bottom: 15px;">ssasy</code> &copy; 2023
+        <app-logo
+          name-size="1rem"
+          logo-size="25px"
+          show-copyright/>
       </v-col>
 
       <!-- links -->
